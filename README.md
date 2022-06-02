@@ -31,7 +31,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Damn Vulnerable Web Application (DVWA).  If not, see <http://www.gnu.org/licenses/>.
+along with Damn Vulnerable Web Application (DVWA).  If not, see <https://www.gnu.org/licenses/>.
 
 - - -
 
@@ -40,6 +40,7 @@ along with Damn Vulnerable Web Application (DVWA).  If not, see <http://www.gnu.
 This file is available in multiple languages:
 
 - Chinese: [简体中文](README.zh.md)
+- Turkish: [Türkçe](README.tr.md)
 
 If you would like to contribute a translation, please submit a PR. Note though, this does not mean just run it through Google Translate and send that in, those will be rejected.
 
@@ -59,7 +60,7 @@ Or [download a ZIP of the files](https://github.com/digininja/DVWA/archive/maste
 
 ## Installation
 
-**Please make sure your config/config.inc.php file exists. Only having a config.inc.php.dist will not be sufficient and you'll have to edit it to suit your environment and rename it to config.inc.php. [Windows may hide the trailing extension.](https://support.microsoft.com/en-in/help/865219/how-to-show-or-hide-file-name-extensions-in-windows-explorer)**
+**Please make sure your config/config.inc.php file exists. Only having a config.inc.php.dist will not be sufficient and you'll have to edit it to suit your environment and rename it to config.inc.php. [Windows may hide the trailing extension.](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/)**
 
 ### Installation Videos
 
@@ -153,6 +154,8 @@ _Note: This will be different if you installed DVWA into a different directory._
 
 ## Docker Container
 
+_This section of the readme was added by @thegrims, for support on Docker issues, please contact them or @opsxcq who is the maintainer of the Docker image and repo. Any issue tickets will probably be pointed at this and closed._
+
 - [dockerhub page](https://hub.docker.com/r/vulnerables/web-dvwa/)
 `docker run --rm -it -p 80:80 vulnerables/web-dvwa`
 
@@ -163,6 +166,24 @@ Please ensure you are using aufs due to previous MySQL issues. Run `docker info`
 ## Troubleshooting
 
 These assume you are on a Debian based distro, such as Debian, Ubuntu and Kali. For other distros, follow along, but update the command where appropriate.
+
+### I browsed to the site and got a 404
+
+If you are having this problem you need to understand file locations. By default, the Apache document root (the place it starts looking for web content) is `/var/www/html`. If you put the file `hello.txt` in this directory, to access it you would browse to `http://localhost/hello.txt`.
+
+If you created a directory and put the file in there - `/var/www/html/mydir/hello.txt` - you would then need to browse to `http://localhost/mydir/hello.txt`.
+
+Linux is by default case sensitive and so in the example above, if you tried to browse to any of these, you would get a `404 Not Found`:
+
+- `http://localhost/MyDir/hello.txt`
+- `http://localhost/mydir/Hello.txt`
+- `http://localhost/MYDIR/hello.txt`
+
+How does this affect DVWA? Most people use git to checkout DVWA into `/var/www/html`, this gives them the directory `/var/www/html/DVWA/` with all the DVWA files inside it. They then browse to `http://localhost/` and get either a `404` or the default Apache welcome page. As the files are in DVWA, you must browse to `http://localhost/DVWA`.
+
+The other common mistake is to browse to `http://localhost/dvwa` which will give a `404` because `dvwa` is not `DVWA` as far as Linux directory matching is concerned.
+
+So after setup, if you try to visit the site and get a `404`, think about where you installed the files to, where they are relative to the document root, and what the case of the directory you used is.
 
 ### "Access denied" running setup
 
@@ -302,34 +323,6 @@ For more information, see:
 
 <https://www.ryadel.com/en/fix-mysql-server-gone-away-packets-order-similar-mysql-related-errors/>
 
-### SQL Injection won't work on PHP v5.2.6.
-
-PHP 5.x reached end of life in January 2019 so we would recommend running DVWA with a current 7.x version, if you must use 5.x...
-
-If you are using PHP v5.2.6 or above, you will need to do the following in order for SQL injection and other vulnerabilities to work.
-
-In `.htaccess`:
-
-Replace:
-
-```php
-<IfModule mod_php5.c>
-    php_flag magic_quotes_gpc off
-    #php_flag allow_url_fopen on
-    #php_flag allow_url_include on
-</IfModule>
-```
-
-With:
-
-```php
-<IfModule mod_php5.c>
-    magic_quotes_gpc = Off
-    allow_url_fopen = On
-    allow_url_include = On
-</IfModule>
-```
-
 ### Command Injection won't work
 
 Apache may not have high enough privileges to run commands on the web server. If you are running DVWA under Linux make sure you are logged in as root. Under Windows log in as Administrator.
@@ -382,7 +375,7 @@ The challenges are exactly the same as for MySQL, they just run against SQLite3 
 
 ## Links
 
-Homepage: <http://www.dvwa.co.uk/>
+Homepage: <https://dvwa.co.uk/>
 
 Project Home: <https://github.com/digininja/DVWA>
 
