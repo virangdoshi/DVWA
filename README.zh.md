@@ -13,7 +13,7 @@ DVWA的具体目标是通过简单明了的界面，来**演练一些最常见�
 
 ## 警告！
 
-DVWA十分易受攻击！  **不要将其上传到您的云服务器的公共 html 文件夹或任何面向 Internet 的服务器**，因为它们会受到危害。 建议使用虚拟机（如[VirtualBox](https://www.virtualbox.org/) 或[VMware](https://www.vmware.com/)），设置为NAT组网方式。在客机（guest machine）中，您可以下载并安装 [XAMPP](https://www.apachefriends.org/en/xampp.html) 作为 Web 服务器和数据库。
+DVWA十分易受攻击！  **不要将其上传到您的云服务器的公共 html 文件夹或任何面向 Internet 的服务器**，因为它们会受到危害。 建议使用虚拟机（如[VirtualBox](https://www.virtualbox.org/) 或[VMware](https://www.vmware.com/)），设置为NAT组网方式。在客机（guest machine）中，您可以下载并安装 [XAMPP](https://www.apachefriends.org/) 作为 Web 服务器和数据库。
 
 ### 免责声明
 
@@ -65,11 +65,11 @@ git clone https://github.com/digininja/DVWA.git
 
 ### Windows + XAMPP
 
-如果您还没有设置 Web 服务器，安装 DVWA 的最简单方法是下载并安装 [XAMPP](https://www.apachefriends.org/en/xampp.html)。
+如果您还没有设置 Web 服务器，安装 DVWA 的最简单方法是下载并安装 [XAMPP](https://www.apachefriends.org/)。
 
 XAMPP 是一个非常易于安装的 Apache 发行版，适用于 Linux、Solaris、Windows 和 Mac OS X。该软件包包括 Apache Web 服务器、MySQL、PHP、Perl、一个 FTP 服务器和 phpMyAdmin。
 
-XAMPP 可以从以下位置下载：https://www.apachefriends.org/en/xampp.html 
+XAMPP 可以从以下位置下载：https://www.apachefriends.org/
 
 只需解压缩 dvwa.zip，将解压缩的文件放在您的公共 html 文件夹中，然后使用浏览器访问：`http://127.0.0.1/dvwa/setup.php`
 
@@ -348,8 +348,6 @@ setsebool -P httpd_can_network_connect_db 1
 - - -
 
 ## 链接
-
-主页: <https://dvwa.co.uk/>
 
 项目主页: <https://github.com/digininja/DVWA>
 

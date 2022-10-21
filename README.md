@@ -8,7 +8,7 @@ Please note, there are **both documented and undocumented vulnerabilities** with
 
 ## WARNING!
 
-Damn Vulnerable Web Application is damn vulnerable! **Do not upload it to your hosting provider's public html folder or any Internet facing servers**, as they will be compromised. It is recommended using a virtual machine (such as [VirtualBox](https://www.virtualbox.org/) or [VMware](https://www.vmware.com/)), which is set to NAT networking mode. Inside a guest machine, you can download and install [XAMPP](https://www.apachefriends.org/en/xampp.html) for the web server and database.
+Damn Vulnerable Web Application is damn vulnerable! **Do not upload it to your hosting provider's public html folder or any Internet facing servers**, as they will be compromised. It is recommended using a virtual machine (such as [VirtualBox](https://www.virtualbox.org/) or [VMware](https://www.vmware.com/)), which is set to NAT networking mode. Inside a guest machine, you can download and install [XAMPP](https://www.apachefriends.org/) for the web server and database.
 
 ### Disclaimer
 
@@ -60,28 +60,49 @@ Or [download a ZIP of the files](https://github.com/digininja/DVWA/archive/maste
 
 ## Installation
 
-**Please make sure your config/config.inc.php file exists. Only having a config.inc.php.dist will not be sufficient and you'll have to edit it to suit your environment and rename it to config.inc.php. [Windows may hide the trailing extension.](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/)**
-
 ### Installation Videos
 
+- [Installing DVWA on Kali running in VirtualBox](https://www.youtube.com/watch?v=WkyDxNJkgQ4)
 - [Installing Damn Vulnerable Web Application (DVWA) on Windows 10](https://www.youtube.com/watch?v=cak2lQvBRAo) [12:39 minutes]
 
 ### Windows + XAMPP
 
-The easiest way to install DVWA is to download and install [XAMPP](https://www.apachefriends.org/en/xampp.html) if you do not already have a web server setup.
+The easiest way to install DVWA is to download and install [XAMPP](https://www.apachefriends.org/) if you do not already have a web server setup.
 
 XAMPP is a very easy to install Apache Distribution for Linux, Solaris, Windows and Mac OS X. The package includes the Apache web server, MySQL, PHP, Perl, a FTP server and phpMyAdmin.
 
 XAMPP can be downloaded from:
-<https://www.apachefriends.org/en/xampp.html>
+<https://www.apachefriends.org/>
 
 Simply unzip dvwa.zip, place the unzipped files in your public html folder, then point your browser to: `http://127.0.0.1/dvwa/setup.php`
+
+### Config File
+
+DVWA ships with a dummy copy of its config file which you will need to copy into place and then make the appropriate changes. On Linux, assuming you are in the DVWA directory, this can be done as follows:
+
+`cp config/config.inc.php.dist config/config.inc.php`
+
+On Windows, this can be a bit harder if you are hiding file extensions, if you are unsure about this, this blog post explains more about it:
+
+[How to Make Windows Show File Extensions](https://www.howtogeek.com/205086/beginner-how-to-make-windows-show-file-extensions/)
 
 ### Linux Packages
 
 If you are using a Debian based Linux distribution, you will need to install the following packages _(or their equivalent)_:
 
-`apt-get -y install apache2 mariadb-server php php-mysqli php-gd libapache2-mod-php`
+- apache2
+- libapache2-mod-php
+- mariadb-server
+- mariadb-client
+- php php-mysqli
+- php-gd
+
+I would recommend doing an update before this, just so you make sure you are going to get the latest version of everything.
+
+```
+apt update
+apt install -y apache2 mariadb-server mariadb-client php php-mysqli php-gd libapache2-mod-php
+```
 
 The site will work with MySQL instead of MariaDB but we strongly recommend MariaDB as it works out of the box whereas you have to make changes to get MySQL to work correctly.
 
@@ -374,8 +395,6 @@ The challenges are exactly the same as for MySQL, they just run against SQLite3 
 - - -
 
 ## Links
-
-Homepage: <https://dvwa.co.uk/>
 
 Project Home: <https://github.com/digininja/DVWA>
 
